@@ -7,13 +7,13 @@ body {
 	line-height: 1.4;
 	margin: 0;
 	padding: 0;
-	margin-top: 50px;
+	margin-top: 100px;
 	margin: 0 auto;
   }
   
   /* Form styles */
   #weather-form {
-	margin-top: 50px;
+	margin-top: 100px;
 	font-size: 30px;
 	margin: 0 auto;
 	text-align: center;
@@ -87,7 +87,7 @@ body {
   }
   
   #temperature {
-	margin-top: 20px;
+
 	font-size: 40px;
 	color: #000000;
 	align-items: center;
@@ -105,7 +105,7 @@ body {
   
   #outfit {
 	font-size: 45px;
-	margin-top: 20px;
+	margin-top: 100px;
 	color: #dbd9d9;
 	font-weight: bold;
 	
