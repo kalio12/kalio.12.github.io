@@ -7,13 +7,15 @@ body {
 	line-height: 1.4;
 	margin: 0;
 	padding: 0;
-	margin-top: 150px;
+	margin-top: 50px;
+	margin: 0 auto;
   }
   
   /* Form styles */
   #weather-form {
-	margin-top: 150px;
-	
+	margin-top: 50px;
+	font-size: 30px;
+	margin: 0 auto;
 	text-align: center;
   }
   
@@ -55,12 +57,12 @@ body {
 	animation-iteration-count: infinite;*/
 	color: #4B515D;
 	display: none;
-	width: 300px;
+	width: 500px;
 	margin: 0 auto;
-	padding: 20px;
-	border-radius: 10px;
-	background-color: #3d3f47;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	margin-top: 50px;
+
+	
+
   }
   @keyframes weather-animation {
 	from { background-position: 0 0; }
@@ -69,9 +71,9 @@ body {
   #city,
   #time {
 	font-size: 18px;
-	text-align: right;
-	margin-left: auto; 
-	margin-right: 0;
+	align-items: center;
+	text-align: center;
+	margin: 0 auto;
 	width: 150px;
 	color: #dbd9d9;
   }
@@ -102,7 +104,7 @@ body {
   }
   
   #outfit {
-	font-size: 30px;
+	font-size: 45px;
 	margin-top: 20px;
 	color: #dbd9d9;
 	font-weight: bold;
