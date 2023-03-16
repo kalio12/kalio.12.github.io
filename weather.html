@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The World's Least Helpful Stylist</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+
+  </head>
+  <body>
+    <form id="weather-form">
+      <label for="zip-code">Don't know what to wear? Ask ChatGPT to dress you! Enter your location:</label>
+      <input type="text" id="zip-code" name="zip-code" required>
+      <button type="submit">Help, I'm Wardrobe Challenged!</button>
+    </form>
+
+    <div id="weather-container">
+        <div id="city"></div>
+        <div id="time"></div>
+
+      <script>
+        setInterval(() => {
+          const time = new Date();
+          document.querySelector('#time').textContent = time.toLocaleTimeString();
+        }, 1000);
+      </script>
+      <div id="temperature"></div>
+      <div id="description"></div>
+      <img id="icon">
+      <div id="outfit"></div>
+    </div>
+
+    <script>
+      function displayWeather(weather) {
+        document.querySelector('#city').textContent = weather.city;
+        document.querySelector('#description').textContent = weather.description;
+        document.querySelector('#temperature').textContent = `${weather.temperature} °C`;
+        document.querySelector('#icon').src = `https://openweathermap.org/img/wn/${weather.icon}.png`;
+    
+      }
+      function displayOutfit(outfit) {
+        document.querySelector('#weather-container').style.display = 'block';
+        document.querySelector('#outfit').textContent = outfit.response;
+      }
+
+      document.querySelector('#weather-form').addEventListener('submit', event => {
+        event.preventDefault();
+        const zipCode = document.querySelector('#zip-code').value;
+        fetch(`https://kalio12-wewather.azurewebsites.net/weather?zipCode=${zipCode}`)
+          .then(response => response.json())
+          .then(data => {
+            displayWeather(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      });
+
+      document.querySelector('#weather-form').addEventListener('submit', event => {
+        event.preventDefault();
+        const zipCode = document.querySelector('#zip-code').value;
+        fetch(`https://kalio12-wewather.azurewebsites.net/suggestedclothing?zipCode=${zipCode}`)
+          .then(response => response.json())
+          .then(data => {
+            displayOutfit(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      });
+      
+    </script>
+  </body>
+</html>
