@@ -83,7 +83,7 @@
         event.preventDefault();
         const zipCode = document.querySelector('#user_input_autocomplete_address').value;
         const budget = document.querySelector('#budget-dropdown').value;
-        fetch(`http://localhost:3000/getrestaurants?zipCode=${zipCode}?budget=${budget}`)
+        fetch(`https://kalio12-wewather.azurewebsites.net/getrestaurants?zipCode=${zipCode}?budget=${budget}`)
           .then(response => response.json())
           .then(data => {
           
