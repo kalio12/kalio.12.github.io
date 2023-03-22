@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurant Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+
+  </head>
+  <body onload = "loadMap()">
+    
+    <div id = "top">Let AI Feed You</div>
+    <form id="zip-form">
+      
+      <label for="zip-code">Location:</label>
+      <input id="user_input_autocomplete_address" name="user_input_autocomplete_address"
+                         class="form-control" placeholder="Start typing your address..." required>
+                </div>
+        
+      <button type="submit">Feed Me</button>
+    </form>
+    
+    <form id="budget-form"><label for="budget-form">Budget: </label>
+      <select name="budget" id="budget-dropdown" required>
+          <option value="most expensive">Bankrupt Me</option>
+          <option value="reasonably priced">Something Reasonably Priced</option>
+          <option value="budget">Can I Eat For Free?</option>
+        </select></form>
+ 
+    <div id = "restaurants">
+    <div id = "rest1"></div>
+    <div id = "rest2"></div>
+    <div id = "rest3"></div>
+    <div id = "rest4"></div>
+    <div id = "rest5"></div>
+  </div>
+  <div id = "map" style = "width:640px; height:480px;" ></div>
+  <div id = "exp">Uses the Open AI API to recommend the best restaurants within your budget and 20 miles of your desired location </div>
+      <script>
+
+  
+        function loadMap(restaurantlist) {
+          // Initialize Google Maps
+         
+          const mapOptions = {
+            center:new google.maps.LatLng(40.7416, -73.9896),
+            zoom: 11
+          };
+          let map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+          // Load JSON Data
+          const restMarkers = restaurantlist;
+          let lon = 0
+          let lat = 0
+          let i =1
+          // Initialize Google Markers
+
+          for(restaurant of restMarkers) {
+            let marker = new google.maps.Marker({
+              map: map,
+              position: new google.maps.LatLng(restaurant.coordinates[0], restaurant.coordinates[1]),
+              title: restaurant.name
+              
+            })
+            document.querySelector(`#rest${i}`).textContent = restaurant.name
+            i = i+1
+            if(restMarkers.indexOf(restaurant) === restMarkers.length - 1){
+              lon = parseFloat(restaurant.coordinates[1])
+              lat = parseFloat(restaurant.coordinates[0])
+              
+            }
+          }
+          map.setCenter(new google.maps.LatLng(lat, lon))
+          
+        }
+      </script>
+      <script src = "https://maps.googleapis.com/maps/api/js"></script>
+
+    <script>
+
+
+
+      document.querySelector('#zip-form').addEventListener('submit', event => {
+        event.preventDefault();
+        const zipCode = document.querySelector('#user_input_autocomplete_address').value;
+        const budget = document.querySelector('#budget-dropdown').value;
+        fetch(`http://localhost:3000/getrestaurants?zipCode=${zipCode}?budget=${budget}`)
+          .then(response => response.json())
+          .then(data => {
+          
+            loadMap(data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      });
+
+
+      
+    </script>
+    <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyBJviAQF1mDYHGDfbkt63bPfNS2A0Vtf8o"></script>
+    <script type="text/javascript" src="autocomplete.js"></script>
+  </body>
+</html>
